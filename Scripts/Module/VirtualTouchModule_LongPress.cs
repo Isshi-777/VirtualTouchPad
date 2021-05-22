@@ -25,9 +25,9 @@ public class VirtualTouchModule_LongPress : AVirtualTouchMojule_OneFinger
     public OnLongPressEvent OnLongPress { set; get; }
 
     /// <summary>
-    /// イベントを呼び出したか
+    /// 有効であるか
     /// </summary>
-    private bool isCalledEvent;
+    private bool isValid;
 
     /// <summary>
     /// タイマー
@@ -36,22 +36,26 @@ public class VirtualTouchModule_LongPress : AVirtualTouchMojule_OneFinger
 
     public override VirtualTouchPadConstants.ModuleType ModuleType => VirtualTouchPadConstants.ModuleType.LongPress;
 
+    protected override void OnTouchDown()
+    {
+        this.isValid = true;
+    }
+
     protected override void OnTouching()
     {
-        // まだイベントを呼んでいない場合
-        if (!this.isCalledEvent)
+        if (this.isValid)
         {
             var distance = this.GetDistance(this.touchDownPosition, this.currentPosition);
             if (distance > this.judgeRadius)
             {
                 // 指定範囲を超えた場合は今回のタッチではイベントを呼べないようにする
-                this.isCalledEvent = true;
+                this.isValid = false;
                 return;
             }
 
             if (this.timer >= this.judgeTime && distance <= this.judgeRadius)
             {
-                this.isCalledEvent = true;
+                this.isValid = false;
                 this.OnLongPress?.Invoke();
                 return;
             }
@@ -65,6 +69,6 @@ public class VirtualTouchModule_LongPress : AVirtualTouchMojule_OneFinger
         base.Refresh();
 
         this.timer = 0f;
-        this.isCalledEvent = false;
+        this.isValid = false;
     }
 }
