@@ -21,9 +21,14 @@ public class VirtualTouchModule_Click : AVirtualTouchMojule_OneFinger
     /// <summary>
     /// 有効であるか（この値がFalseの時はイベントを呼べない）
     /// </summary>
-    private bool isValid = true;
+    private bool isValid;
 
     public override VirtualTouchPadConstants.ModuleType ModuleType => VirtualTouchPadConstants.ModuleType.Click;
+
+    protected override void OnTouchDown()
+    {
+        this.isValid = true;
+    }
 
     protected override void OnTouching()
     {
@@ -54,6 +59,6 @@ public class VirtualTouchModule_Click : AVirtualTouchMojule_OneFinger
 
     protected override void Refresh()
     {
-        this.isValid = true;
+        this.isValid = false;
     }
 }
