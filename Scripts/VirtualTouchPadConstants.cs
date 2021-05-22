@@ -22,5 +22,10 @@ public static class VirtualTouchPadConstants
         /// クリック
         /// </summary>
         Click,
+
+        /// <summary>
+        /// ドラッグ
+        /// </summary>
+        Drag,
     }
 }
