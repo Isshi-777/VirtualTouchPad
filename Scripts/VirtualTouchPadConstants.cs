@@ -17,5 +17,10 @@ public static class VirtualTouchPadConstants
         /// 長押し
         /// </summary>
         LongPress,
+
+        /// <summary>
+        /// クリック
+        /// </summary>
+        Click,
     }
 }
