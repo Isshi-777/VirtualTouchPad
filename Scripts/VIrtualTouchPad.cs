@@ -104,7 +104,33 @@ namespace Isshi777
         }
 
         /// <summary>
-        /// Moduleを返す
+        /// Moduleを返す（ModuleがNullでない場合はTrueを返す）
+        /// </summary>
+        /// <typeparam name="T">AVirtualTouchModuleを継承したクラス</typeparam>
+        /// <param name="moduleType">Moduleタイプ</param>
+        /// <param name="result">返すModule</param>
+        /// <returns>Moduleを返せるか（「resultにNullでないModuleをせって追できる場合はTrue」）</returns>
+        public bool TryGetModule<T>(VirtualTouchPadConstants.ModuleType moduleType, out T result) where T : AVirtualTouchModule
+        {
+            result = this.GetModule<T>(moduleType);
+            return result != null;
+        }
+
+        /// <summary>
+        /// Moduleを返す（ModuleがNullでない場合はTrueを返す）
+        /// </summary>
+        /// <param name="moduleType">Moduleタイプ</param>
+        /// <param name="result">返すModule</param>
+        /// <returns>Moduleを返せるか（「resultにNullでないModuleをせって追できる場合はTrue」）</returns>
+        public bool TryGetModule(VirtualTouchPadConstants.ModuleType moduleType, out AVirtualTouchModule result)
+        {
+            result = this.GetModule(moduleType);
+            return result != null;
+        }
+
+
+        /// <summary>
+        /// Moduleを返す（ModuleがNullでない場合はTrueを返す）
         /// </summary>
         /// <typeparam name="T">AVirtualTouchModuleを継承したクラス</typeparam>
         /// <param name="moduleType">Moduleタイプ</param>
@@ -124,7 +150,7 @@ namespace Isshi777
             AVirtualTouchModule module = null;
             if (this.moduleList != null)
             {
-                System.Array.Find(this.moduleList, x => x.ModuleType == moduleType);
+                module = System.Array.Find(this.moduleList, x => x.ModuleType == moduleType);
             }
 
             if (module == null)
