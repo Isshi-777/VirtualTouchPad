@@ -10,4 +10,7 @@
 ・ドラッグ  
 ・フリック  
     
-※CanvasGroupのBlockRaycastなどは一切影響なし。
+※CanvasGroupのBlockRaycastなどは一切影響なし。  
+![Videotogif](https://user-images.githubusercontent.com/36006543/119259216-24e9e280-bc08-11eb-99ad-5d4a15b5569f.gif)
+
+
