@@ -130,7 +130,7 @@ namespace Isshi777
 
 
         /// <summary>
-        /// Moduleを返す（ModuleがNull出ない場合はTrueを返す）
+        /// Moduleを返す（ModuleがNullでない場合はTrueを返す）
         /// </summary>
         /// <typeparam name="T">AVirtualTouchModuleを継承したクラス</typeparam>
         /// <param name="moduleType">Moduleタイプ</param>
