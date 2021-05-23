@@ -124,7 +124,7 @@ namespace Isshi777
             AVirtualTouchModule module = null;
             if (this.moduleList != null)
             {
-                System.Array.Find(this.moduleList, x => x.ModuleType == moduleType);
+                module = System.Array.Find(this.moduleList, x => x.ModuleType == moduleType);
             }
 
             if (module == null)
