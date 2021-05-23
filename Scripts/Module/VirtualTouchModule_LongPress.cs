@@ -1,74 +1,77 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// 「長押し」モジュール
-/// </summary>
-[DisallowMultipleComponent]
-public class VirtualTouchModule_LongPress : AVirtualTouchMojule_OneFinger
+namespace Isshi777
 {
     /// <summary>
-    /// 長押し判定範囲
+    /// 「長押し」モジュール
     /// </summary>
-    [SerializeField]
-    private float judgeRadius;
-
-    /// <summary>
-    /// 長押し判定時間
-    /// </summary>
-    [SerializeField]
-    private float judgeTime;
-
-    /// <summary>
-    /// イベント
-    /// </summary>
-    public delegate void OnLongPressEvent();
-    public OnLongPressEvent OnLongPress { set; get; }
-
-    /// <summary>
-    /// 有効であるか
-    /// </summary>
-    private bool isValid;
-
-    /// <summary>
-    /// タイマー
-    /// </summary>
-    private float timer;
-
-    public override VirtualTouchPadConstants.ModuleType ModuleType => VirtualTouchPadConstants.ModuleType.LongPress;
-
-    protected override void OnTouchDown()
+    [DisallowMultipleComponent]
+    public class VirtualTouchModule_LongPress : AVirtualTouchMojule_OneFinger
     {
-        this.isValid = true;
-    }
+        /// <summary>
+        /// 長押し判定範囲
+        /// </summary>
+        [SerializeField]
+        private float judgeRadius;
 
-    protected override void OnTouching()
-    {
-        if (this.isValid)
+        /// <summary>
+        /// 長押し判定時間
+        /// </summary>
+        [SerializeField]
+        private float judgeTime;
+
+        /// <summary>
+        /// イベント
+        /// </summary>
+        public delegate void OnLongPressEvent();
+        public OnLongPressEvent OnLongPress { set; get; }
+
+        /// <summary>
+        /// 有効であるか
+        /// </summary>
+        private bool isValid;
+
+        /// <summary>
+        /// タイマー
+        /// </summary>
+        private float timer;
+
+        public override VirtualTouchPadConstants.ModuleType ModuleType => VirtualTouchPadConstants.ModuleType.LongPress;
+
+        protected override void OnTouchDown()
         {
-            var distance = this.GetDistance(this.touchDownPosition, this.currentPosition);
-            if (distance > this.judgeRadius)
-            {
-                // 指定範囲を超えた場合は今回のタッチではイベントを呼べないようにする
-                this.isValid = false;
-                return;
-            }
-
-            if (this.timer >= this.judgeTime && distance <= this.judgeRadius)
-            {
-                this.isValid = false;
-                this.OnLongPress?.Invoke();
-                return;
-            }
-
-            this.timer += Time.deltaTime;
+            this.isValid = true;
         }
-    }
 
-    protected override void Refresh()
-    {
-        base.Refresh();
+        protected override void OnTouching()
+        {
+            if (this.isValid)
+            {
+                var distance = this.GetDistance(this.touchDownPosition, this.currentPosition);
+                if (distance > this.judgeRadius)
+                {
+                    // 指定範囲を超えた場合は今回のタッチではイベントを呼べないようにする
+                    this.isValid = false;
+                    return;
+                }
 
-        this.timer = 0f;
-        this.isValid = false;
+                if (this.timer >= this.judgeTime && distance <= this.judgeRadius)
+                {
+                    this.isValid = false;
+                    this.OnLongPress?.Invoke();
+                    return;
+                }
+
+                this.timer += Time.deltaTime;
+            }
+        }
+
+        protected override void Refresh()
+        {
+            base.Refresh();
+
+            this.timer = 0f;
+            this.isValid = false;
+        }
     }
 }
