@@ -1,6 +1,7 @@
 # VirtualTouchPad
 
-仮想タッチパッド
+仮想タッチパッド  
+※IPointerDownHandlerやIPointerUpHandlerを実装する方ではないやり方
 
 ## 使用例
 範囲指定をして下記の操作を検知し、セットされたイベントを実行する機構  
